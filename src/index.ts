@@ -12,6 +12,8 @@ app.use(express.json());
 
 app.use('/api', routes);
 
+app.get('/', (_req,res) => res.send({msg: "oK"}) );
+
 app.listen(process.env.PORT_EXPRESS || 3000, () => {
     ddbbConnection();
     console.log(`Server on PORT ${process.env.PORT_EXPRESS}`);    
