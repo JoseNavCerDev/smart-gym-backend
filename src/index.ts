@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use('/api', routes);
 
-app.listen(process.env.PORT_EXPRESS, () => {
+app.listen(process.env.PORT_EXPRESS || 3000, () => {
     ddbbConnection();
     console.log(`Server on PORT ${process.env.PORT_EXPRESS}`);    
 });
