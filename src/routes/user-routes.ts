@@ -13,7 +13,7 @@ const userRouter = express.Router();
 //Create USER endpoint
 userRouter.post('/create', createUserController);
 
-//Read USER endpoint sending email in req.body
+//Read USER endpoint sending USER in req.body
 userRouter.get('/get-user', getUserController);
 
 //Update USER endpoint wiht ID

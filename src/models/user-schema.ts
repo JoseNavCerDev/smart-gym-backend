@@ -2,6 +2,21 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
+const cardSchema = new Schema(
+    {
+        card_number: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        expiration_date:{
+            type: Date,
+            required: true,
+            trim: true
+        }
+    }
+);
+
 const userSchema = new Schema(
     {
         name: {
@@ -11,7 +26,8 @@ const userSchema = new Schema(
         },
         user: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         password: {
             type: String,
@@ -26,9 +42,15 @@ const userSchema = new Schema(
         status: {
             type: String,
             required: true,
-            trim: false
+            trim: false,
+            enum: ['Active', 'Inactive'],
+            default: "Inactive"
         },
-        cards: [],
+        balance:{
+            type: Number,
+            default: 0
+        },
+        cards: cardSchema,
         id_role: {
             type: String,
             required: true,
