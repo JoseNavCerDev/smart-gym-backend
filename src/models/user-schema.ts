@@ -43,8 +43,8 @@ const userSchema = new Schema(
             type: String,
             required: true,
             trim: false,
-            enum: ['Active', 'Inactive'],
-            default: "Inactive"
+            enum: ['active', 'inactive', 'deleted'],
+            default: "inactive"
         },
         balance:{
             type: Number,
