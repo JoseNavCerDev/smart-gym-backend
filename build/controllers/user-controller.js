@@ -32,8 +32,8 @@ exports.createUserController = createUserController;
 function getUserController(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { email } = req.body;
-            const userFromDDBB = yield user_schema_1.default.findOne({ email });
+            const { user } = req.body;
+            const userFromDDBB = yield user_schema_1.default.findOne({ user });
             res.send(userFromDDBB);
         }
         catch (error) {
@@ -57,13 +57,14 @@ function updateUserController(req, res) {
 }
 exports.updateUserController = updateUserController;
 //FUNCTION to delete USER
-function deleteUserController(req, res) {
+function deleteUserController(_req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { id } = req.params;
-            const userFromDDBB = yield user_schema_1.default.findById(id);
-            userFromDDBB === null || userFromDDBB === void 0 ? void 0 : userFromDDBB.delete();
-            res.send(`User ${id} was deleted successfully...`);
+            /* const { id } = req.params;
+            const userFromDDBB = await User.findById(id);
+            userFromDDBB?.delete();
+            res.send(`User ${id} was deleted successfully...`); */
+            res.send('<h1>Hello world madafacas...</h1>');
         }
         catch (error) {
             res.status(400).send('something went wrong...');

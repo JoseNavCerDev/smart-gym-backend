@@ -34,7 +34,8 @@ dotenv.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use('/api', routes_1.default);
-app.listen(process.env.PORT, () => {
+app.get('/', (_req, res) => res.send({ msg: "oK" }));
+app.listen(process.env.PORT || 3000, () => {
     (0, ddbb_1.ddbbConnection)();
     console.log(`Server on PORT ${process.env.PORT}`);
 });

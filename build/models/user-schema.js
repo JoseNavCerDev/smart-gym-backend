@@ -5,6 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const { Schema } = mongoose_1.default;
+const cardSchema = new Schema({
+    card_number: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    expiration_date: {
+        type: Date,
+        required: true,
+        trim: true
+    }
+});
 const userSchema = new Schema({
     name: {
         type: String,
@@ -13,7 +25,8 @@ const userSchema = new Schema({
     },
     user: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -28,9 +41,15 @@ const userSchema = new Schema({
     status: {
         type: String,
         required: true,
-        trim: false
+        trim: false,
+        enum: ['Active', 'Inactive'],
+        default: "Inactive"
     },
-    cards: [],
+    balance: {
+        type: Number,
+        default: 0
+    },
+    cards: cardSchema,
     id_role: {
         type: String,
         required: true,

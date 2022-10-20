@@ -35,7 +35,7 @@ export async function updateUserController(req: Request, res: Response) {
 }
 
 //FUNCTION to delete USER
-export async function deleteUserController(req: Request, res: Response) {
+export async function deleteUserController(_req: Request, res: Response) {
     try {
         /* const { id } = req.params;
         const userFromDDBB = await User.findById(id);
