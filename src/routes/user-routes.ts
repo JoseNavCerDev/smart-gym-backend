@@ -20,7 +20,7 @@ userRouter.get('/get-user', getUserController);
 userRouter.put('/update/:id', updateUserController);
 
 //Delete USER endpoint with endpoint
-userRouter.delete('/delete/:id', deleteUserController);
+userRouter.get('/delete/:id', deleteUserController);
 
 
 
