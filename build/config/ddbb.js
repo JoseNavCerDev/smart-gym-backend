@@ -1,28 +1,16 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ddbbConnection = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
-function ddbbConnection() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield mongoose_1.default.connect(`${process.env.MONGO_CONNECTION}`);
-            console.log("Successful connection to DDBB");
-        }
-        catch (error) {
-            console.log(error);
-        }
-    });
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+import mongoose from 'mongoose';
+export async function ddbbConnection() {
+    const user = process.env.DB_USER;
+    const password = process.env.DB_PASSWORD;
+    const conection = process.env.DB_CONECTION_FORMAT;
+    const uri = `${conection}//${user}:${password}.mongodb.net/?retryWrites=true&w=major`;
+    try {
+        await mongoose.connect(uri);
+        return console.log('Successful connection to DDBB');
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
-exports.ddbbConnection = ddbbConnection;

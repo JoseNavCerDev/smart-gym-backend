@@ -1,20 +1,24 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
+import express, { Request, Response, NextFunction } from 'express'
+import * as dotenv from 'dotenv'
 
-import routes from './routes/routes';
-import {ddbbConnection} from './config/ddbb';
+import routes from './routes/routes.js'
+import { ddbbConnection } from './config/ddbb.js'
 
-dotenv.config();
+dotenv.config()
 
-const app = express();
+const app = express()
 
-app.use(express.json());
+app.use(express.json())
 
-app.use('/api', routes);
+app.use('/api', routes)
 
-app.get('/', (_req,res) => res.send({msg: "oK"}) );
+app.use((error: any, _req: Request, res: Response, _next: NextFunction) => {
+  return res.status(400).send(error.message)
+})
 
-app.listen(process.env.PORT || 3000, () => {
-    ddbbConnection();
-    console.log(`Server on PORT ${process.env.PORT}`);    
-});
+const PORT = process.env.PORT ?? 3000
+
+app.listen(PORT, () => {
+  console.log(ddbbConnection())
+  console.log(`Server on PORT ${PORT}`)
+})
