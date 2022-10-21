@@ -4,6 +4,11 @@ const { Schema } = mongoose;
 
 const cardSchema = new Schema(
     {
+        name_owner: {
+            type: String,
+            required: true,
+            trim: true
+        },
         card_number: {
             type: String,
             required: true,
@@ -22,12 +27,13 @@ const userSchema = new Schema(
         name: {
             type: String,
             required: true,
-            trim: false
+            trim: true
         },
         user: {
             type: String,
             required: true,
-            unique: true
+            unique: true,
+            trim: true
         },
         password: {
             type: String,
@@ -37,26 +43,31 @@ const userSchema = new Schema(
         email:{
             type: String,
             required: true,
-            unique: true
+            unique: true,
+            trim: true,
+            match: [/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/, 'Please fill a valid email address']
         },
         status: {
             type: String,
             required: true,
             trim: false,
-            enum: ['active', 'inactive', 'deleted'],
+            enum: ['active', 'inactive', 'expired', 'deleted'],
             default: "inactive"
         },
-        balance:{
+        days:{ //Dias que le quedan al ususario
             type: Number,
             default: 0
         },
-        cards: cardSchema,
+        cards: [cardSchema],
         id_role: {
-            type: String,
-            required: true,
-            trim: false
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Roles',
+            required: true
         },
-        classes: []
+        classes: {
+            type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'classes' }],
+            default: [] 
+        }
     }
 );
 
