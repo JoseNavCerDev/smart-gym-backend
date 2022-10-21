@@ -1,11 +1,11 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const { Schema } = mongoose_1.default;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 const cardSchema = new Schema({
+    name_owner: {
+        type: String,
+        required: true,
+        trim: true
+    },
     card_number: {
         type: String,
         required: true,
@@ -21,12 +21,13 @@ const userSchema = new Schema({
     name: {
         type: String,
         required: true,
-        trim: false
+        trim: true
     },
     user: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true
     },
     password: {
         type: String,
@@ -36,26 +37,32 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true,
+        match: [/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/, 'Please fill a valid email address']
     },
     status: {
         type: String,
         required: true,
         trim: false,
-        enum: ['Active', 'Inactive'],
-        default: "Inactive"
+        enum: ['active', 'inactive', 'expired', 'deleted'],
+        default: 'inactive'
     },
-    balance: {
+    days: {
+        // Days left to the user
         type: Number,
         default: 0
     },
-    cards: cardSchema,
+    cards: [cardSchema],
     id_role: {
-        type: String,
-        required: true,
-        trim: false
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Roles',
+        required: true
     },
-    classes: []
+    classes: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'classes' }],
+        default: []
+    }
 });
-const User = mongoose_1.default.model('user', userSchema);
-exports.default = User;
+const User = mongoose.model('user', userSchema);
+export default User;

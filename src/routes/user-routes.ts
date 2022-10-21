@@ -1,27 +1,19 @@
-import express from 'express';
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import express from 'express'
+// All controllers about USER
+import { index, create, update } from '../controllers/user-controller.js'
 
-//All controllers about USER 
-import {
-    createUserController, 
-    getUserController, 
-    updateUserController, 
-    deleteUserController
-}  from '../controllers/user-controller';
+const userRouter = express.Router()
 
-const userRouter = express.Router();
+// Read USER endpoint sending USER in req.body
+userRouter.get('/users', index)
 
-//Create USER endpoint
-userRouter.post('/create', createUserController);
+// Create USER endpoint
+userRouter.post('/users', create)
 
-//Read USER endpoint sending USER in req.body
-userRouter.get('/get-user', getUserController);
+// Update USER endpoint wiht ID
+userRouter.put('/users/:id', update)
 
-//Update USER endpoint wiht ID
-userRouter.put('/update/:id', updateUserController);
+// Delete USER endpoint with endpoint
 
-//Delete USER endpoint with endpoint
-userRouter.get('/delete/:id', deleteUserController);
-
-
-
-export default userRouter;
+export default userRouter
