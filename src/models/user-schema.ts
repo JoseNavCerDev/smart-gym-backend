@@ -51,11 +51,6 @@ const userSchema = new Schema({
     enum: ['active', 'inactive', 'expired', 'deleted'],
     default: 'inactive'
   },
-  days: {
-    // Days left to the user
-    type: Number,
-    default: 0
-  },
   cards: [cardSchema],
   id_role: {
     type: mongoose.Schema.Types.ObjectId,
