@@ -8,6 +8,7 @@ export enum StatusType {
   Expired = 'expired',
   Right = 'deleted'
 }
+
 export interface UserType {
   name: string
   user: string
@@ -18,3 +19,4 @@ export interface UserType {
   id_role: string
   classes?: []
 }
+

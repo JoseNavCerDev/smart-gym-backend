@@ -10,7 +10,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/api', routes)
+app.use('/api/v1', routes)
 
 app.use((error: any, _req: Request, res: Response, _next: NextFunction) => {
   return res.status(400).send(error.message)
