@@ -22,3 +22,4 @@ export interface UserType {
   id_role: Types.ObjectId
   classes?: []
 }
+
