@@ -1,7 +1,9 @@
+import { Types } from 'mongoose'
+
 // role
 export interface RoleType { name: 'manager' | 'clerk' | 'trainer' | 'customer' }
 
-// user
+// status for users
 export enum StatusType {
   Active = 'active',
   Inactive = 'inactive',
@@ -9,6 +11,7 @@ export enum StatusType {
   Right = 'deleted'
 }
 
+// user
 export interface UserType {
   name: string
   user: string
@@ -16,7 +19,7 @@ export interface UserType {
   email: string
   status?: string
   card?: []
-  id_role: string
+  id_role: Types.ObjectId
   classes?: []
 }
 
