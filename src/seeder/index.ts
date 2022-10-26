@@ -56,7 +56,8 @@ const seedAll = async () => {
     // close conection
     return await mongoose.connection.close()
   } catch (error) {
-    return error
+    console.log(error)
+    return await mongoose.connection.close()
   }
 }
 
