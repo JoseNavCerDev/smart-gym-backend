@@ -48,11 +48,6 @@ const userSchema = new Schema({
         enum: ['active', 'inactive', 'expired', 'deleted'],
         default: 'inactive'
     },
-    days: {
-        // Days left to the user
-        type: Number,
-        default: 0
-    },
     cards: [cardSchema],
     id_role: {
         type: mongoose.Schema.Types.ObjectId,
@@ -63,6 +58,6 @@ const userSchema = new Schema({
         type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'classes' }],
         default: []
     }
-});
+}, { timestamps: true });
 const User = mongoose.model('user', userSchema);
 export default User;
